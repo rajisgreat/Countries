@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Countries Info</title>
+
+  <style>
+  #img,#imgn,#imgo{
+    height: 100px;
+    width: 100px;
+  }
+
+
+  </style>
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body> 
+<img id="img"
+src="https://media.tenor.com/UnFx-k_lSckAAAAM/amalie-steiness.gif"></img>
+  <img id="imgn"
+src="https://media.tenor.com/UnFx-k_lSckAAAAM/amalie-steiness.gif"></img>
+ <img id="imgo"
+src="https://media.tenor.com/UnFx-k_lSckAAAAM/amalie-steiness.gif"></img>
+ 
+  <p id="abbr">Title</p>
+  <p id="setup">Loading...</p>
+  <p id="name">Loading...</p>
+   <p id="cap">Loading...</p>
+  
+  <p id="curr">Loading...</p>
+  <n id="pop">Loading...</n>crores
+  
+   <br><br>
+   Look at <a href="https://api.sampleapis.com/countries/countries" target="_blank">Json</a>
+
+  <script>
+    reload();
+
+    function reload() {
+
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var r = Math.floor(Math.random() * 250 + 1);
+          var myObj = JSON.parse(this.responseText);
+          document.getElementById("img").src = myObj[r].media.flag;
+           document.getElementById("imgn").src = myObj[r].media.emblem;
+          document.getElementById("imgo").src = myObj[r].media.orthographic;
+          
+          document.getElementById("abbr").innerHTML = myObj[r].abbreviation;
+          document.getElementById("setup").innerHTML = myObj[r].phone;
+          document.getElementById("name").innerHTML = myObj[r].name;
+          document.getElementById("curr").innerHTML = myObj[r].currency;
+          document.getElementById("pop").innerHTML = myObj[r].population + "&nbsp;";
+
+          document.getElementById("cap").innerHTML = myObj[r].capital;
+     
+          //document.getElementById("imgemblem").src = myObj[r].media.emblem;
+          //document.getElementById("imgortho").src = myObj[r].media.orthographic;
+          //document.write(imgd+'');
+        }
+      };
+      xmlhttp.open("GET", "https://api.sampleapis.com/countries/countries", true);
+      xmlhttp.send();
+
+    }
+  </script>
+</body>
+
+</html>
+ 
